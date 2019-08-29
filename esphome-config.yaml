@@ -1,0 +1,52 @@
+esphome:
+  name: my_cover
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: "...ssid..."
+  password: "...pass..."
+
+# Enable logging
+logger:
+
+ota:
+
+mqtt:
+  broker: "my.brocker.ip"
+  username: ...user...
+  password: ...pass...
+
+output:
+  - platform: esp8266_pwm
+    id: servo_output
+    pin: D1
+    frequency: 50 Hz
+
+servo:
+  - id: cover_servo
+    output: servo_output
+    min_level: 3.7%
+    idle_level: 5.5%
+    max_level: 7.9%
+
+cover:
+  - platform: time_based
+    name: "My Covers"
+
+    open_action:
+      - servo.write: 
+          id: cover_servo
+          level: 100.0%
+    open_duration: '0:01:10'
+
+    close_action:
+      - servo.write: 
+          id: cover_servo
+          level: -100.0%
+    close_duration: '0:01:10'
+
+    stop_action:
+      - servo.write: 
+          id: cover_servo
+          level: 0.0%

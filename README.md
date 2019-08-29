@@ -20,3 +20,7 @@ Some adujustables settings are on top of the file. Most of them are prefilled wi
 _Important:_ Don't forget to insert your wifi and mqtt broker credentials.
 
 If you have more than one controller in your configuration, change the `COVER_ID` to a unique id.
+
+## ESPHome
+
+If you already have `ESPHome` running, I also added the config for it.
